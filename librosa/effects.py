@@ -37,10 +37,13 @@ import numpy as np
 import scipy.signal
 
 from . import core
-from . import decompose
-from . import feature
 from . import util
 from .util.exceptions import ParameterError
+
+# Lazy imports for functions we don't use in smart-media-cutter
+# These will raise ImportError if the functions that need them are called
+decompose = None  # type: ignore
+feature = None  # type: ignore
 from typing import Any, Callable, Iterable, Optional, Tuple, List, Union, overload
 from typing_extensions import Literal
 from numpy.typing import ArrayLike

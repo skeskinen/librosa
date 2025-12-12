@@ -13,7 +13,6 @@ import numpy as np
 import scipy
 import scipy.signal
 import soxr
-import lazy_loader as lazy
 
 from numba import jit, stencil, guvectorize
 from .fft import get_fftlib
@@ -28,9 +27,16 @@ from .._typing import _FloatLike_co, _IntLike_co, _SequenceLike
 from typing import Any, BinaryIO, Callable, Generator, Optional, Tuple, Union
 from numpy.typing import DTypeLike
 
-# Lazy-load optional dependencies
-samplerate = lazy.load("samplerate")
-resampy = lazy.load("resampy")
+# Optional dependencies for alternative resampling backends
+try:
+    import samplerate  # type: ignore
+except ImportError:
+    samplerate = None  # type: ignore
+
+try:
+    import resampy
+except ImportError:
+    resampy = None  # type: ignore
 
 __all__ = [
     "load",

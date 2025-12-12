@@ -1,84 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""Utility functions - stripped for smart-media-cutter."""
 
-# Skip pydocstyle checks that erroneously trigger on "example"
-# noqa: D405,D214,D407
-"""
-Utilities
-=========
+from .exceptions import LibrosaError, ParameterError
 
-Array operations
-----------------
-.. autosummary::
-    :toctree: generated/
+from .utils import (
+    fix_length,
+    frame,
+    pad_center,
+    valid_audio,
+    valid_int,
+    is_positive_int,
+    normalize,
+    tiny,
+    MAX_MEM_BLOCK,
+)
 
-    frame
-    pad_center
-    expand_to
-    fix_length
-    fix_frames
-    index_to_slice
-    softmask
-    stack
-    sync
+from .decorators import deprecated
 
-    axis_sort
-    normalize
-    shear
-    sparsify_rows
-
-    buf_to_float
-    tiny
-
-Matching
---------
-.. autosummary::
-    :toctree: generated/
-
-    match_intervals
-    match_events
-
-Miscellaneous
--------------
-.. autosummary::
-    :toctree: generated/
-
-    localmax
-    localmin
-    peak_pick
-    nnls
-    cyclic_gradient
-    dtype_c2r
-    dtype_r2c
-    count_unique
-    is_unique
-    abs2
-    phasor
-
-
-Input validation
-----------------
-.. autosummary::
-    :toctree: generated/
-
-    valid_audio
-    valid_int
-    valid_intervals
-    is_positive_int
-
-
-File operations
----------------
-.. autosummary::
-    :toctree: generated/
-
-    example
-    example_info
-    list_examples
-    find_files
-    cite
-"""
-
-import lazy_loader as lazy
-
-__getattr__, __dir__, __all__ = lazy.attach_stub(__name__, __file__)
+__all__ = [
+    "LibrosaError",
+    "ParameterError",
+    "fix_length",
+    "frame",
+    "pad_center",
+    "valid_audio",
+    "valid_int",
+    "is_positive_int",
+    "normalize",
+    "tiny",
+    "MAX_MEM_BLOCK",
+    "deprecated",
+]
