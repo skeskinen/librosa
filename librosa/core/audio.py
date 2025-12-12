@@ -27,16 +27,7 @@ from .._typing import _FloatLike_co, _IntLike_co, _SequenceLike
 from typing import Any, BinaryIO, Callable, Generator, Optional, Tuple, Union
 from numpy.typing import DTypeLike
 
-# Optional dependencies for alternative resampling backends
-try:
-    import samplerate  # type: ignore
-except ImportError:
-    samplerate = None  # type: ignore
-
-try:
-    import resampy
-except ImportError:
-    resampy = None  # type: ignore
+import samplerate
 
 __all__ = [
     "load",
