@@ -2,15 +2,35 @@
 # -*- coding: utf-8 -*-
 """Utility functions for dealing with files"""
 from __future__ import annotations
-from typing import Any, List, Optional, Set, Union
+from typing import List, Optional, Union, Any, Set
 
-import os
+import contextlib
 import glob
+import os
+import sys
+
+from importlib import resources
 
 
 __all__ = [
     "find_files",
 ]
+
+
+@contextlib.contextmanager
+def _resource_file(package: str, resource: str):
+    """Provide a context manager for accessing resources in a package.
+
+    It acts as a shim to provide a consistent interface for accessing resources
+    since the 3.9 series deprecated the "path" method in favor of the "files" method.
+    """
+    if sys.version_info < (3, 9):
+        with resources.path(package, resource) as path:
+            yield path
+
+    else:
+        with resources.as_file(resources.files(package).joinpath(resource)) as path:
+            yield path
 
 
 def find_files(
